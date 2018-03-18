@@ -26,7 +26,7 @@
 			<a href="/signup">Signup here</a>
 		</div>
 
-		<form class="forms">
+		<div class="forms">
 			<!--<span>Username</span>-->
 			<!--<input type="text" id="username" placeholder="Username">-->
 			<span>Email</span>
@@ -35,40 +35,40 @@
 			<input type="password" id="password" placeholder="Password">
 			<button id="submit" type="submit">Signin</button>
 			<div id="error"></div>
-		</form>
+		</div>
 
 	</div>
-	<script src="/lib/jquery/dist/jquery.min.js"></script>
-	<script src="/vendor/ejs_production.js"></script>
-	<script>
-		var user = {};
-		$("#email").change(function(event){
-			user.email = $("#email").val();
-		});
-		$("#password").change(function(event){
-			user.password = $("#password").val();
-		});
-		$("#submit").click(function(event){
-			$.ajax({
-				method: 'POST',
-				url: '/auth/signin',
-				data: user
-			}).done(function(response){
-				console.log(response);
-				window.location.replace('/');
-			}).fail(function(response){
-				console.log(response);
-        		$('#error').css({
-        			'display': 'block',
-        			'border': '1px solid #ff0000',
-        			'color': '#ff0000',
-        			'padding': '10px',
-        			'font-size': '13px
-        			
-        		});
-        		$('#error').text("Username or password don't match! Try again");
-			});
-		});
-	</script>
-	
 </body>
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/vendor/ejs_production.js"></script>
+<script>
+	var user = {};
+	$("#email").change(function(event){
+		user.email = $("#email").val();
+	});
+	$("#password").change(function(event){
+		user.password = $("#password").val();
+	});
+	$("#submit").click(function(event){
+		$.ajax({
+			method: 'POST',
+			url: '/auth/signin',
+			data: user
+		}).done(function(response){
+			alert('Welcome ' + user.email);
+			console.log(response);
+			window.location.replace('/browse');
+		}).fail(function(response){
+			console.log(response);
+			$('#error').css({
+				"display": "block",
+				"border": "1px solid #ff0000",
+				"color": "#ff0000",
+				"padding": "10px",
+				"font-size": "13px"
+			});
+			$("#error").text("Username or password don't match! Try again");
+		});
+	});
+</script>
+</html>

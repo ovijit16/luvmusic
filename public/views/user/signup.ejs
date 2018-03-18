@@ -2,50 +2,83 @@
 <html>
 <head>
 	<title>Signup | Luv Music</title>
-	<link rel="stylesheet" type="text/css" href="css/signinStyle.css">
+	<link rel="stylesheet" type="text/css" href="/views/css/signinStyle.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <body>
-
 	<div class="header">
-		<a href="index.html">Luv Music</a>
+		<a href="/">Luv Music</a>
 		<hr>
 	</div>
-
 	<div class="section">
-		
 		<div class="login-notice-section">
 			<!-- error message -->
-			<p class="error-message" id="error-message"></p>
 			<h1>Register</h1> or
-			<a href="login.html">login here</a>
+			<a href="/signin">signin here</a>
 		</div>
-
-		<form class="forms" method="POST" name="vform">
+		<div class="forms">
 			<span>Full Name</span>
-			<input type="text" name="name" placeholder="Your name">
+			<input type="text" id="name" placeholder="Your name">
 			<span>Email</span>
-			<input type="email" name="email" placeholder="Email">
+			<input type="email" id="email" placeholder="Email">
 			<span>Username</span>
-			<input type="text" name="username" placeholder="Username">
+			<input type="text" id="username" placeholder="Username">
 			<span>Password</span>
-			<input type="password" name="password" placeholder="Password">
+			<input type="password" id="password" placeholder="Password">
 			<span>Confirm Password</span>
-			<input type="password" name="confirm_password" placeholder="Confirm password">
+			<input type="password" id="confirm_password" placeholder="Confirm password">
 			<span>City</span>
-			<input type="text" name="city" placeholder="City">
+			<input type="text" id="city" placeholder="City">
 			<span>Country</span>
-			<input type="text" name="country" placeholder="Country">
-			<button id="signup" type="submit">Sign up</button>
-
-		</form>
-		<div class="content-container" style="display: none;">
-			
+			<input type="text" id="country" placeholder="Country">
+			<button id="submit" type="submit">Sign up</button>
+			<div id="error"></div>
 		</div>
-
 	</div>
-
-
 </body>
+<!-- <script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/vendor/ejs_production.js"></script> -->
+<!-- <script>
+	var newUser = {"name": "", "email": "", "username": "", "password": "", "city": "", "country": ""};
+	
+	$("#submit").click(function(){
+		console.log('Submit clicked!');
+		newUser.name = $("#name").val();
+		newUser.email = $("#email").val();
+		newUser.username = $('#username').val();
+		if($("#password").val() === $("#confirm_password").val()) {
+			newUser.password = $('#password').val();
+		} else {
+			$('#error').css({
+				"display": "block",
+				"border": "1px solid #ff0000",
+				"color": "#ff0000",
+				"padding": "10px",
+				"font-size": "13px"
+			});
+			$("#error").text("Password don't match!");
+		}
+		newUser.city = $("#city").val();
+		newUser.country = $("#country").val();
+		$.ajax({
+			method: 'POST',
+			url: "/about",
+			// url: '/user/signup',
+			data: newUser
+		}).done(function(response){
+			console.log(response);
+		}).fail(function(response){
+			console.log(response.responseText);
+			$('#error').css({
+				"display": "block",
+				"border": "1px solid #ff0000",
+				"color": "#ff0000",
+				"padding": "10px",
+				"font-size": "13px"
+			});
+			$("#error").text("Signup not completed! Please try again!");
+		});
+	});
+</script> -->
 </html>

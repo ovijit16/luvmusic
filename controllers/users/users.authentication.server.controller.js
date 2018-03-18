@@ -75,6 +75,16 @@ exports.signinView = function(req, res) {
 };
 
 /**
+ * Signup
+ */
+exports.signupView = function(req, res) {
+	res.render('./../public/views/user/signup.ejs', {
+	   user: req.user || null,
+	   request: req
+	});
+};
+
+/**
  * Signout
  */
 exports.signout = function(req, res) {

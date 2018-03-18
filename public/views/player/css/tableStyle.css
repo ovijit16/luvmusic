@@ -1,0 +1,155 @@
+.row {
+    width:  100%;
+}
+
+
+/* music list page */
+
+table.music-list {
+    width:  100%;
+    text-align:  center;
+    border: none;
+    display:  table;
+    border-spacing:  inherit;
+    border-collapse: separate;
+}
+
+tr.music-list-table-header {
+    background: #000;
+}
+
+th.no-change-list {
+    padding: 10px 5px;
+    color: #999;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing:  2px;
+    font-weight: 400;
+    font-size: 14px;
+    width:  auto;
+}
+
+tr.music-list-table {
+    background: #101010;
+}
+
+td.music-list-shade {
+    padding: 10px;
+}
+
+.play-pause-header {
+    width: 40px;
+}
+
+td.music-list-shade,
+td.music-list-shade a,
+td.option-title,
+td.option-title a {
+    text-decoration: none;
+    color:  #ccc;
+    font-family:  'Comfortaa', cursive;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+td.music-list-shade a:hover,
+td.option-title a:hover {
+    color: #099;
+}
+
+td.music-title {
+    text-align: left;
+}
+
+
+/* details page */
+
+table.music-info {
+    width:  50%;
+    border: none;
+    padding: 40px;
+}
+
+tr {
+    width:  100%;
+}
+
+td.title-desc {
+    width: 160px;
+    font-family:  'Open Sans', sans-serif;
+    color: #cccccc;
+    line-height:  30px;
+    font-size: 13px;
+    letter-spacing:  1px;
+    text-align:  right;
+    padding-right: 25px;
+    font-weight: 600;
+    border-right: 1px solid #333;
+}
+
+td.value-desc {
+    font-family:  'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    padding-left: 15px;
+    letter-spacing:  1px;
+    font-weight:  400;
+    line-height: 30px;
+    text-align: left;
+}
+
+td.edit-btn {
+    padding: 20px 0;
+    text-align: right;
+    padding-right: 25px;
+    line-height:  30px;
+}
+
+td.back-to-prev {
+    padding: 20px 0;
+    text-align: left;
+    padding-left: 15px;
+    line-height:  30px;
+}
+
+td.edit-btn > a,
+td.back-to-prev > a {
+    font-size:  16px;
+    padding: 5px 15px;
+    background:  #ffffff;
+    text-decoration:  none;
+    border-radius:  4px;
+    color: #099;
+    font-family:  'Open Sans', sans-serif;   
+    font-weight:  400;  
+    border-bottom: 2px solid #099;
+}
+
+td.edit-btn > a:hover,
+td.back-to-prev > a:hover {
+    background: #099;
+    color: #ffffff;
+    transition: 0.2s;
+}
+
+.album-art-details {
+    width: 140px;
+    height: 140px;
+    border-radius: 5px;
+    overflow:  hidden;
+}
+
+img.img-details {
+    width: 100%;
+}
+
+.album-name{
+    background: black;
+    color: white;
+    height: 50px;
+    width: 20%;
+    letter-spacing: 3px;
+    font-size: 30px;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+}

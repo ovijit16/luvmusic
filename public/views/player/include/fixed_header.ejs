@@ -1,0 +1,27 @@
+<div class="fixed-header">
+	<div class="search-bar">
+		<input class="search-box" type="text" name="search" placeholder="Username">
+		<button class="search-btn">
+			<i class="fa fa-search"></i>
+		</button>
+	</div>
+	<div class="user-account">
+		<span class="user-profile">
+			<a class="user-profile-link" href="/profile">
+				<i class="fa fa-user"></i> Profile</a>
+		</span>
+		<div class="dropdown">
+			<button onclick="dropdown()" class="dropbtn">
+				<i class="fa fa-angle-down"></i>
+			</button>
+			<div class="dropdown-content" id="dropDown">
+				<a class="user-profile-link display-block-style" href="/profile">
+					<i class="fa fa-user-circle"></i> Account</a>
+				<a class="user-profile-link display-block-style" href="/setting">
+					<i class="fa fa-gear"></i> Setting</a>
+				<a class="user-profile-link display-block-style" href="/">
+					<i class="fa fa-sign-out"></i> Logout</a>
+			</div>
+		</div>
+	</div>
+</div>

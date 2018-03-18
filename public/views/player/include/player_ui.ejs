@@ -1,0 +1,42 @@
+<div class="player-fixed">
+    <!-- album art and title name -->
+    <div class="album-art-container">
+        <div class="album-art">
+            <img id="albumArt" class="album-art-img" src="">
+        </div>
+        <div class="title-track">
+            <h3 id="titleSong" class="song-title-fixed-player"></h3>
+            <h4 id="nameArtist" class="artist-title-fixed-player"></h4>
+        </div>
+    </div>
+    
+    <!-- controller and buttons -->
+    <div class="music-controller">
+        <!-- handler and timing duration goes here -->
+        <div class="controller-all">
+            <div class="prev-play-pause-next">
+                <button class="shuffle controller-btn" id="shuffle" onclick="shuffleMode()"><i class="fa fa-random"></i></button>
+                <button class="previous controller-btn" id="previousSong" onclick="previousSong()"><i class="fa fa-step-backward"></i></button>
+                <button class="play-pause controller-btn" id="playPause" onclick="playPause()"><i class="fa fa-play"></i></button>
+                <button class="next controller-btn" id="nextSong" onclick="nextSong()"><i class="fa fa-step-forward"></i></button>
+                <button class="repeat controller-btn" id="repeat" onclick="repeatMode()"><i class="fa fa-sync"></i></button>
+            </div>
+            <div class="time-controller">
+                <div class="time currentTime">
+                    <span id="currentTime" class="real-time"> 00.00</span>
+                </div>
+                <div class="time seeker">
+                    <div id="knotTime" class="time-line"></div>
+                </div>
+                <div class="time durationTime">
+                    <span id="duration" class="duration"> 00.00</span>
+                </div>
+            </div>
+        </div>
+        <div class="volume-shuffle-repeat">
+            <button class="volume-controller controller-btn controller-btn2" id="volumeController" onclick="mute(event)"><i class="fa fa-volume-up"></i></button>
+            <div id="volume" class="volumeSlider">
+            </div>
+        </div>
+    </div>
+</div>

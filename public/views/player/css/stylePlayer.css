@@ -1,0 +1,293 @@
+.player-fixed {
+	background: #252530;
+	position: fixed;
+	height: 82px;
+	line-height: 82px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	display:  block;
+}
+
+.album-art-container {
+	position:  relative;
+	float:  left;
+	width: 25%;
+	height: 100%;
+	padding:  10px;
+}
+
+.album-art {
+	width: 60px;
+	height:  60px;
+	display:  block;
+	float: left;
+	position:  relative;
+	border: 1px solid #cccccc;
+	overflow:  hidden;
+	border-radius: 3px;
+}
+
+.album-art-img {
+	width: 100%;
+}
+
+.title-track {
+	position:  relative; 
+	float:  left;
+	padding-left: 15px;
+	vertical-align:  middle; 
+	display:  block; 
+}
+
+h3.song-title-fixed-player {
+	font-family: 'Open Sans', cursive;
+	font-size: 13px;
+	font-weight:  400;
+	color: #ffffff;
+	letter-spacing: 1px;
+	text-transform:  capitalize;
+	line-height: 30px;
+}
+
+h4.artist-title-fixed-player {
+	font-family:  'Open Sans', sans-serif;
+	font-size: 13px;
+	font-weight:  400;
+	letter-spacing: 1px;color: #cccccc;
+	line-height: 30px;
+	text-transform: capitalize;
+	text-overflow: ellipsis;
+}
+
+.controller-all {
+	/* background: linear-gradient(#fff, #eee); */
+	float: left;
+	width: 80%;
+	text-align:  center;
+	height: 100%;
+}
+
+.music-controller {
+	float: left;
+	position: relative;
+	display: block;
+	cursor: pointer;
+	width: 75%;
+}
+
+.time-controller {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	display:  flex;
+	margin: 0 auto;
+}
+
+#knotTime {
+	float: left;
+    background: #555;
+    width: 100%;
+    height: 5px;
+    border-radius: 20px;
+    display: flex;
+    position: absolute;
+}
+
+.real-time {
+	vertical-align: middle;
+}
+
+#knotTime .ui-slider-range-min {
+	width:  40%;
+	height:  100%;
+	display:  flex;
+	background:  #ff9816;
+	border-radius: 20px;
+	position: absolute;
+}
+
+#knotTime .ui-slider-handle {
+    width: 16px;
+    height: 16px;
+    background: #00e85f;
+    position: absolute;
+    margin-left: -8px;
+    margin-top: -5px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+}
+
+.animated-line {
+	width: 0%;
+	background: #00e85f;
+	height: 100%;
+	border-radius: 20px;
+}
+
+.prev-play-pause-next {
+	height: 52px;
+	line-height: 52px;
+	display: block;
+	position:  relative;
+	float: left;
+	text-align:  center;
+	width:  100%;
+}
+
+.controller-btn {
+	width:  35px;
+	height:  35px;
+	background: none;
+	border:  none;
+	border-radius: 50%;
+	outline: none;
+	cursor: pointer;
+}
+
+i.fa.fa-play {
+	vertical-align: middle;
+	font-size: 14px;
+}
+
+button#pause {
+	display:  none;
+}
+
+.volume-shuffle-repeat {
+	width: 20%;
+	float: right;
+}
+
+button.controller-btn:hover i.fa {
+	color: #fff;
+}
+
+button.controller-btn:focus i.fa {
+	color: #777;
+}
+
+.time {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 11px;
+	letter-spacing: 2px;
+	margin: 0px auto;
+	color: #ccc;
+	float: left;
+	position: relative;
+}
+
+.currentTime {
+	width: 10%;
+}
+
+.seeker {
+	width: 80%;
+	margin-top: 12px;
+}
+
+.durationTime {
+	width: 10%;
+}
+
+button.controller-btn i {
+	font-size: 14px;
+	vertical-align: middle;
+	color: #ccc;
+}
+
+button#playPause {
+	border: 1px solid #ccc;
+	border-radius:  50%;
+}
+
+.fa-sync:before {
+    content: "\f021";
+}
+
+.volume-controller {
+  width:  35px;
+  height:  35px;
+  border: none;
+  outline:  none;
+  cursor:  pointer;
+  float: left;
+  height: 82px;
+}
+
+#volume {
+	float: left;
+	margin-left: 40px;
+	background: #555;
+	width: 100px;
+	height: 5px;
+	margin-top: 40px;
+	border-radius: 20px;
+	display: flex;
+	position: absolute;
+}
+
+#volume .ui-slider-range-min {
+	width:  40%;
+	height:  100%;
+	display:  flex;
+	background:  #ff9816;
+	border-radius: 20px;
+	position: absolute;
+}
+
+#volume .ui-slider-handle {
+    width: 16px;
+    height: 16px;
+    background: #00e85f;
+    position: absolute;
+    margin-left: -8px;
+    margin-top: -5px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+}
+
+@media(max-width: 800px) {
+    .col-xs-4 {
+    width: 40%;
+    position:  relative;
+    display: block;
+    float: left;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.album-art-container {
+    position: relative;
+    float: left;
+    width: 25%;
+    height: 100%;
+    padding: 10px;
+    display: none;
+}
+.music-controller {
+    float: left;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+.controller-all {
+    float: left;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+.volume-shuffle-repeat {
+    width: 20%;
+    float: right;
+    display: none;
+}
+}
