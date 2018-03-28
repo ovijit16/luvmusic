@@ -293,17 +293,22 @@ form.contact-form {
     margin:  15px;
 }
 
+.contact-form .input-field span {
+  margin-bottom: 20px;
+}
+
 .contact-form .input-field input,
 .contact-form .input-field textarea {
     width: 50%;
-    height: 30px;
-    padding: 3px 5px;
+    height: 40px;
+    padding: 10px;
     background: #ffffff;
-    margin-bottom: 20px;
+    margin-top: 20px;
     border: none;
     outline: none;
     border-bottom: 1px solid #149a0f;
     color: #333;
+    box-sizing: border-box;
     font-size: 14px;
 }
 
@@ -315,11 +320,15 @@ form.contact-form {
 .contact-form .input-field textarea:focus {
     outline: none;
     border-bottom: 1px solid #2020ff;
+    color: #2020ff;
 }
 
-.contact-form input[type="submit"] {
+.contact-form input[type="submit"],
+.contact-form button[type="submit"] {
   width: 115px;
   height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   outline: none;
   border: none;
   background: #005000;
@@ -331,7 +340,8 @@ form.contact-form {
   cursor: pointer;
 }
 
-.contact-form input[type="submit"]:hover {
+.contact-form input[type="submit"]:hover,
+.contact-form button[type="submit"]:hover {
   background: #005f00;
 }
 

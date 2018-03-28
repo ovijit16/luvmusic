@@ -22,13 +22,13 @@ module.exports.music = function(req, res)
 };
 
 // profile page
-module.exports.profile = function(req, res)
-{
-	res.render('./../public/views/player/profile.ejs', {
-		user: req.user || null,
-		request: req
-	});
-};
+// module.exports.profile = function(req, res)
+// {
+// 	res.render('./../public/views/player/profile.ejs', {
+// 		user: req.user || null,
+// 		request: req
+// 	});
+// };
 
 // details page
 module.exports.details = function(req, res)
@@ -58,10 +58,10 @@ module.exports.search = function(req, res)
 };
 
 // setting page
-module.exports.setting = function(req, res)
-{
-	res.render('./../public/views/player/setting.ejs', {
-		user: req.user || null,
-		request: req
-	});
-};
+// module.exports.setting = function(req, res)
+// {
+// 	res.render('./../public/views/player/setting.ejs', {
+// 		user: req.user || null,
+// 		request: req
+// 	});
+// };

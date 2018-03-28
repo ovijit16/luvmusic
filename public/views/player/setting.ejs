@@ -10,7 +10,11 @@
 
 	<!-- javascript link -->
 	<script src="/views/player/js/script.js"></script>
-
+	<!-- script for dropbox api to upload -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.min.js"></script>
 </head>
 <body>
 	<!-- Sidebar Panel -->
@@ -30,39 +34,49 @@
 			</div>
 			<div class="content-pane">
 				<div class="row">
-					<form class="edit-form">
+					<form class="edit-form" onSubmit="return uploadFile()">
 						<div class="form-group">
 							<label class="control-label">Name</label>
-							<input class="form-control" type="text" name="name" placeholder="Your name">
+							<input class="form-control" type="text" id="name" name="name" placeholder="Your name">
+							<div class="error" id="name-err"></div>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Username</label>
-							<input class="form-control" type="text" name="username" placeholder="Username">
+							<input class="form-control" type="text" id="username" name="username" placeholder="Username">
+							<div class="error" id="username-err"></div>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Email</label>
-							<input class="form-control" type="text" name="email" placeholder="Your email">
+							<input class="form-control" type="text" id="email" name="email" placeholder="Your email">
+							<div class="error" id="email-err"></div>
 						</div>
 						<div class="form-group">
 							<label class="control-label">City</label>
-							<input class="form-control" type="text" name="city" placeholder="Your city">
+							<input class="form-control" type="text" id="city" name="city" placeholder="Your city">
+							<div class="error" id="city-err"></div>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Country</label>
-							<input class="form-control" type="combobox" name="county" placeholder="Your country">
+							<input class="form-control" type="text" id="country" name="county" placeholder="Your country">
+							<div class="error" id="country-err"></div>
 						</div>
 						<div class="form-group">
 							<div class="album-art-details">
-								<img class="img-details" src="/views/player/img/pp.png">
+								<img id="preview-photo" class="img-details" src="">
 							</div>
 							<span class="change-photo-text">Change Photo</span>
-							<input class="form-control" type="file" name="Image" accept="Image/*">
+							<input class="form-control" type="file" id="photo" name="Image" onchange="previewPhoto()" accept="Image/*">
+							<div class="error" id="photo-err"></div>
+
+							<!-- A place to show the status of the upload -->
+							<h2 id="results"></h2>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Save" class="btn btn-save">
-							<input type="submit" value="Update" class="btn btn-update">
-							<input type="submit" value="Delete Account" class="btn btn-delete">
+							<input type="submit" id="save" value="Save" class="btn btn-save">
+							<input type="submit" id="update" value="Update" class="btn btn-update">
+							<input type="submit" id="delete" value="Delete Account" class="btn btn-delete">
 						</div>
+						<span><div class="error" id="error"></div></span>
 					</form>
 					<form class="edit-form">
 						<div id="#change-pass" class="change-password-div">
@@ -93,4 +107,124 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
 <script src="/views/player/js/player.js"></script>
+<script>
+	var responseId = "";
+	var newProfile = {name:"", username:"", email:"", city:"", country:"", photo:""};
+	var usernamePattern = /^[a-z0-9_-]{3,15}$/;
+	var emailPattern = /^[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z0-9]{2,4})+$/;
+		
+	$('.error').css({
+		"display": "block",
+		"border": "none",
+		"color": "#ff0000",
+		"font-size": "18px",
+		"width": "100%",
+		"box-sizing": "border-box",
+		"font-family": "'Dosis', sans-serif"
+	});
+	
+	$('#save').click(function(){
+		console.log('save clicked');
+		
+		if($('#name').val() == "") {
+			$("#name-err").text("Your name required!");
+		} else {
+			newProfile.name= $('#name').val();
+			$("#name-err").hide();
+		}
+
+		if($('#username').val() == "") {
+			$('#username-err').text("Your username required!");
+		} else if (!$('#username').val().match(usernamePattern)) {
+			$('#username-err').text("Not a valid username!");
+		} else {
+			newProfile.username = $('#username').val();
+			$('#username-err').hide();
+		}
+
+		if($('#email').val() == "") {
+			$('#email-err').text("Your email required!");
+		} else if(!$('#email').val().match(emailPattern) ) {
+			$('#email-err').text("Not a valid email!");
+		} else {
+			newProfile.email = $('#email').val();
+			$("#email-err").hide();
+		}
+		
+		if($('#city').val() == "") {
+			$('#city-err').text("Enter your city!");
+		} else {
+			newProfile.city = $('#city').val();
+			$('#city-err').hide();
+		}
+
+		if($('#country').val() == "") {
+			$("#country-err").text("Enter your country!");
+		} else {
+			newProfile.country = $('#country').val();
+			$("#country-err").hide();
+		}
+
+		$.ajax({
+			method: "POST",
+			url: "/api/persons",
+			data: newProfile
+		}).done(function(response){
+			console.log(response);
+			$("#error").text('Profile saved!').css({
+				"border": "1px solid #00ff00",
+				"color": "#00ff00",
+				"padding": "10px"
+			});
+			responseId = response._id;
+		}).fail(function(response){
+			console.log(response.responseText);
+			$("#error").text(JSON.parse(response.responseText).message).css({
+				"border": "1px solid #ff0000",
+				"color": "#ff0000",
+				"padding": "10px"
+			});
+		});
+	});
+
+	function uploadFile() {
+		// var ACCESS_TOKEN = document.getElementById('access-token').value;
+		var ACCESS_TOKEN = "MyXjMD7lxrAAAAAAAAAB7uH0PeR2XEhNj8ZPnkIPtHc2ZVV4z2Ao0Yq1fqnfVtDB";
+		var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
+		var fileInput = document.getElementById('photo');
+		var file = fileInput.files[0];
+		dbx.filesUpload({path: '/photos/' + file.name, contents: file})
+			.then(function(response) {
+				var results = document.getElementById('results');
+				results.appendChild(document.createTextNode('File uploaded!'));
+				console.log(response);
+				window.location.replace('/profile/' + responseId);
+			})
+			.catch(function(error) {
+				alert(error);
+				console.error(error);
+			});
+		return false;
+	}
+
+	function previewPhoto() {
+		var preview = document.getElementById('preview-photo'); //selects the query named img
+		var file    = document.getElementById('photo').files[0]; //sames as here
+		var reader  = new FileReader();
+
+		reader.onloadend = function () {
+			preview.src = reader.result;
+		}
+
+		if (file) {
+			reader.readAsDataURL(file); //reads the data as a URL
+		} else {
+			preview.src = "";
+		}
+	}
+
+	previewPhoto();
+</script>
+
+
 </html>

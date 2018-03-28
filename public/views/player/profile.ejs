@@ -35,29 +35,29 @@
 							<td class="title-desc"></td>
 							<td class="value-desc">
 								<div class="album-art-details">
-									<img class="img-details" src="/views/player/img/pp.png">
+									<img class="img-details" src="">
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="title-desc">Username</td>
-							<td class="value-desc">ansarker</td>
+							<td class="value-desc"><%= request.person.username %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">Name</td>
-							<td class="value-desc">Anis Sarker</td>
+							<td class="value-desc"><%= request.person.name %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">Email</td>
-							<td class="value-desc">shahidsarker95@hotmail.com</td>
+							<td class="value-desc"><%= request.person.email %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">City</td>
-							<td class="value-desc">Dhaka</td>
+							<td class="value-desc"><%= request.person.city %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">Country</td>
-							<td class="value-desc">Bangladesh</td>
+							<td class="value-desc"><%= request.person.country %></td>
 						</tr>
 						<tr>
 							<td class="edit-btn"><a href="/setting">Setting</a></td>
@@ -72,4 +72,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
 <script src="/views/player/js/player.js"></script>
+<script>
+	$("")
+</script>
+
+
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Messages | Administrator</title>
+	<title id="headtitle"></title>
+	<link rel="shortcut icon" href="/views/headphones.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/tableStyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- javascript link -->
+
+</head>
+
+<body>
+	<!-- Sidebar Panel -->
+	<% include ../include/sidebar %>
+
+		<!-- Main Content -->
+		<div class="main-container">
+			<!-- Fixed Header -->
+			<% include ../include/fixed_header %>
+
+				<div class="container-inside2">
+					<div class="header-text">
+						<h3 class="heading-all-text">Messages Details</h3>
+						<hr>
+					</div>
+					<div class="content-pane">
+						<div class="row">
+							<div class="msg-ui">
+								<div class="msg-ui-part">
+									<div class="msg-header">
+										<div class="msg-subject"> 
+											<h2> <%= request.contact.subject %> </h2>
+										</div>
+										<div class="msg-email">
+											<p> <%= request.contact.email %> </p>
+										</div>
+										<div class="msg-sender">
+											<p> <%= request.contact.name %> </p>
+										</div>
+										<div class="msg-date">
+											<p> <%= request.contact.created %></p>
+										</div>
+									</div>
+									<div class="msg-body">
+										<p> <%= request.contact.message %></p>
+									</div>
+								</div>
+								<div class="btn-container">
+									<a href="/admin/contacts/all" class="btn-msg-body">Back</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+
+		<script src="/lib/jquery/dist/jquery.min.js"></script>
+		<script src="/lib/jquery/dist/script.js"></script>
+		<script src="/lib/jquery/dist/jquery-paginate.js"></script>
+		<script src="/lib/jquery/dist/jquery-paginate.min.js"></script>
+
+		<script>
+			// Paginate it
+			$('#myTable').paginate({
+				limit: 10,
+				initialPage: 0
+			});
+
+		</script>
+</body>
+
+</html>

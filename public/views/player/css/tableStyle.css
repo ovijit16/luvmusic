@@ -1,7 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 .row {
     width:  100%;
 }
-
 
 /* music list page */
 
@@ -134,8 +137,8 @@ td.back-to-prev > a:hover {
 .album-art-details {
     width: 140px;
     height: 140px;
-    border-radius: 5px;
-    overflow:  hidden;
+    overflow: hidden;
+    border: 3px solid #ff3d00;
 }
 
 img.img-details {
@@ -152,4 +155,205 @@ img.img-details {
     text-decoration: none;
     text-align: center;
     padding: 5px;
+}
+
+table.contact-info {
+    width: 100%;
+    border: none;
+    background: #ffffff;
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #005555;
+    border-collapse: collapse;
+}
+
+tr.table-head {
+    background: #eee;
+}
+
+tr.table-data:hover {
+    background: #ddf1ff;
+    cursor: text;
+}
+.table-head th {
+	padding: 10px;
+}
+
+td.tbl-data {
+    text-align: left;
+    padding: 10px;
+    display: block;
+    float: left;
+}
+
+td#msg-no {
+    width: 10%;
+    text-align: center;
+}
+
+td#msg-sender {
+    width: 20%;
+}
+
+td#msg-subject {
+    width: 40%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+td#msg-action {
+    width: 10%;
+    text-align: center;
+}
+
+.page-navigation a {
+    margin: 10px 1px;
+    display: block;
+    float:  left;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 4px;
+    text-decoration: none;
+    width:  40px;
+    height:  40px;
+    line-height:  40px;
+    text-align:  center;
+    font-family: 'Dosis', sans-serif;
+    font-size: 18px;
+}
+
+.page-navigation a[data-selected] {
+	background-color: #3d9be0;
+}
+
+.msg-ui {
+    background: #eeeeee;
+    padding: 20px;
+    box-sizing:  border-box;
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px;
+    display: -webkit-box;
+
+}
+
+.msg-ui-part {
+    width: 600px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing:  border-box;
+    display: block;
+    position: relative;
+    float: left;
+    overflow: hidden;
+}
+
+.btn-container {
+    display:  block;
+    position:  relative;
+    float: left;
+    padding: 0px 20px;
+}
+
+.msg-header {
+    box-sizing: border-box;
+    background: #ffffff;
+    padding: 10px;
+    display: block;
+    border-bottom: 1px solid #dddddd;
+}
+
+.msg-subject {
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+
+h2 {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.msg-email {
+    color: #006d6d;
+    letter-spacing: 2.433px;
+    padding: 5px 10px;
+    background: #edfffd;
+    border-radius: 3px;
+    border: 1px solid #eee;
+}
+
+.msg-sender {
+    color: #666666;
+    padding: 5px 10px;
+    letter-spacing: 1.4px;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+div.msg-date {
+    padding: 5px 10px;
+    text-align: right;
+}
+
+div.msg-date p {
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+div.msg-body {
+    padding: 20px;
+    overflow: scroll;
+    max-height: 400px;
+    background: #fff;
+}
+
+div.msg-body p {
+    font-size: 14px;
+    letter-spacing: 1.4px;
+    line-height: 24px;
+}
+
+.btn-msg-body {
+    text-decoration: none;
+    background: #000;
+    display: block;
+    width: 80px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #F44336;
+    font-size: 18px;
+    border-radius: 3px;
+}
+
+.btn-msg-body:hover {
+    background: #111;
+}
+
+@media (max-width: 912px ) {
+    .msg-ui {
+        display: block;
+    }
+
+    .msg-ui-part {
+        width: 100%;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        display: block;
+        position: relative;
+        float: none;
+        overflow: hidden;
+    }
+
+    .btn-container {
+        display: block;
+        position: relative;
+        float: none;
+        padding: 20px 20px;
+    }
 }

@@ -17,9 +17,9 @@ exports.about = function(req, res) {
 	});
 };
 
-exports.contact = function(req, res) {
-	res.render('./../public/views/contact.ejs', {
-		user: req.user || null,
-		request: req
-	});
-}
+// exports.contact = function(req, res) {
+// 	res.render('./../public/views/contact.ejs', {
+// 		user: req.user || null,
+// 		request: req
+// 	});
+// }
