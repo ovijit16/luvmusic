@@ -9,7 +9,7 @@ module.exports = function(app) {
 
     app.route('/api/contacts')
         .get(contacts.list)
-        .post(users.requiresLogin, contacts.create);
+        .post(/*users.requiresLogin,*/ contacts.create);
 
     app.route('/api/contacts/:contactId')
         .get(contacts.read)
@@ -22,11 +22,10 @@ module.exports = function(app) {
 
 	app.route('/').get(core.index);
 	app.route('/about').get(core.about);
+	app.route('/contact').get(core.contact);
 
-	app.route('/contact').get(contacts.contact);
-
-    app.route('/admin/contacts/all').get(contacts.listView);
-    app.route('/admin/contact/:contactId').get(contacts.singleView);
+    app.route('/admin/contacts').get(users.requiresLogin, contacts.listView);
+    app.route('/admin/contact/:contactId').get(users.requiresLogin, contacts.singleView);
     // app.route('/admin/contact/view').get(contacts.singleView);
 
     app.param('contactId', contacts.contactByID);

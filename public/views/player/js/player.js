@@ -1,5 +1,3 @@
-// var myAudio = document.getElementById("myAudio");
-
 var trackList = [	"Neil young - Heart Of Gold.mp3",
 					"Elvis Presley- In The Ghetto.MP3",
 					"John Lennon - Imagine .mp3",
@@ -17,8 +15,9 @@ var tracks = [
 ];
 
 var currentSong = Math.round(Math.random() * (tracks.length - 1));
-var track = new Audio();
-track.src = tracks[currentSong].path;
+// var track = new Audio();
+var track = document.getElementById("myaudio");
+// track.src = tracks[currentSong].path;
 var isPlaying = false;
 
 function songInfo(songTitle, artistName, albumArt) {

@@ -3,15 +3,6 @@ var Contact = require('./../models/Contact.js');
 var errorHandler = require('./errors.server.controller');
 var _ = require('lodash');
 
-	//sending message
-exports.contact = function(req, res) {
-	res.render('./../public/views/contact.ejs', {
-		user: req.user || null,
-		request: req
-	});
-};
-
-
 module.exports.singleView = function(req, res){
   res.render('./../public/views/player/contact/view.ejs', {
           user: req.user || null,

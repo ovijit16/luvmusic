@@ -1,7 +1,7 @@
 <div class="fixed-header">
 	<div class="search-bar">
 		<input class="search-box" type="text" name="search" placeholder="Username">
-		<button class="search-btn">
+		<button class="search-btn" type="reset">
 			<i class="fa fa-search"></i>
 		</button>
 	</div>
@@ -12,16 +12,35 @@
 		</span>
 		<div class="dropdown">
 			<button onclick="dropdown()" class="dropbtn">
-				<i class="fa fa-angle-down"></i>
+				<i class="fa fa-angle-down"></i> 
+				<!-- &#x0276D; -->
 			</button>
 			<div class="dropdown-content" id="dropDown">
 				<a class="user-profile-link display-block-style" href="/profile">
 					<i class="fa fa-user-circle"></i> Account</a>
 				<a class="user-profile-link display-block-style" href="/setting">
 					<i class="fa fa-gear"></i> Setting</a>
-				<a class="user-profile-link display-block-style" href="/">
+				<a class="user-profile-link display-block-style" id="signout" href="#">
 					<i class="fa fa-sign-out"></i> Logout</a>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+<script>
+	$("#signout").click(function(event){
+		$.ajax({
+			method: 'GET',
+			url: '/auth/signout'
+		}).done(function(response){
+			// alert('Signed out' + user.email);
+			// console.log(response);
+			window.location.replace('/');
+		}).fail(function(response){
+			console.log(response);
+			
+		});
+	});
+</script>

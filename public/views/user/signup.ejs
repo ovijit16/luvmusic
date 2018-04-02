@@ -20,65 +20,133 @@
 		<div class="forms">
 			<span>Full Name</span>
 			<input type="text" id="name" placeholder="Your name">
+			<div class="error" id="name-err"></div>
 			<span>Email</span>
 			<input type="email" id="email" placeholder="Email">
+			<div class="error" id="email-err"></div>
 			<span>Username</span>
 			<input type="text" id="username" placeholder="Username">
+			<div class="error" id="username-err"></div>
 			<span>Password</span>
 			<input type="password" id="password" placeholder="Password">
+			<div class="error" id="password-err"></div>
 			<span>Confirm Password</span>
 			<input type="password" id="confirm_password" placeholder="Confirm password">
+			<div class="error" id="confirm_password-err"></div>
 			<span>City</span>
 			<input type="text" id="city" placeholder="City">
+			<div class="error" id="city-err"></div>
 			<span>Country</span>
 			<input type="text" id="country" placeholder="Country">
+			<div class="error" id="country-err"></div>
 			<button id="submit" type="submit">Sign up</button>
-			<div id="error"></div>
+			<span><div class="error" id="error"></div></span>
 		</div>
 	</div>
 </body>
-<!-- <script src="/lib/jquery/dist/jquery.min.js"></script>
-<script src="/vendor/ejs_production.js"></script> -->
-<!-- <script>
-	var newUser = {"name": "", "email": "", "username": "", "password": "", "city": "", "country": ""};
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script> -->
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/vendor/ejs_production.js"></script>
+<script>
+	var responseId = "";
+	// var newUser = {name:"", username:"", email:"", city:"", country:"", photo:""};
+	var usernamePattern = /^[a-z0-9_.-]{3,15}$/;
+	var emailPattern = /^[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z0-9]{2,4})+$/;
+	var newUser = {name: "", email: "", username: "", password: "", city: "", country: ""};
 	
-	$("#submit").click(function(){
-		console.log('Submit clicked!');
-		newUser.name = $("#name").val();
-		newUser.email = $("#email").val();
-		newUser.username = $('#username').val();
-		if($("#password").val() === $("#confirm_password").val()) {
-			newUser.password = $('#password').val();
+		
+	$('.error').css({
+		"display": "block",
+		"border": "none",
+		"color": "#ff0000",
+		"font-size": "18px",
+		"width": "100%",
+		"box-sizing": "border-box",
+		"font-family": "'Dosis', sans-serif",
+		"margin-bottom": "10px",
+		"text-align": "left"
+	});
+	
+	$('#submit').click(function(){
+		console.log('save clicked');
+		
+		if($('#name').val() == "") {
+			$("#name-err").text("Your name required!");
 		} else {
-			$('#error').css({
-				"display": "block",
-				"border": "1px solid #ff0000",
-				"color": "#ff0000",
-				"padding": "10px",
-				"font-size": "13px"
-			});
-			$("#error").text("Password don't match!");
+			newUser.name= $('#name').val();
+			$("#name-err").hide();
 		}
-		newUser.city = $("#city").val();
-		newUser.country = $("#country").val();
+
+		if($('#username').val() == "") {
+			$('#username-err').text("Your username required!");
+		} else if (!$('#username').val().match(usernamePattern)) {
+			$('#username-err').text("Not a valid username!");
+		} else {
+			newUser.username = $('#username').val();
+			$('#username-err').hide();
+		}
+
+		if($('#email').val() == "") {
+			$('#email-err').text("Your email required!");
+		} else if(!$('#email').val().match(emailPattern) ) {
+			$('#email-err').text("Not a valid email!");
+		} else {
+			newUser.email = $('#email').val();
+			$("#email-err").hide();
+		}
+		
+		if($('#password').val() == "") {
+			$('#password-err').text("Please enter a password!");
+		} else if($('#password').val().length < 8) {
+			$('#passowrd-err').text("Password must be at least 8 character");
+		} else {
+			$('#password-err').hide();
+		}
+
+		if($('#confirm_password').val() == "") {
+			$('#confirm_password-err').text("Please confirm your password!");
+		} else if($('#password').val() !== $('#confirm_password').val()) {
+			$('#confirm_password-err').text("Passwords don't match!");
+		} else {
+			newUser.password = $('#password').val();
+			$('#confirm_password-err').hide();
+		}
+
+		if($('#city').val() == "") {
+			$('#city-err').text("Enter your city!");
+		} else {
+			newUser.city = $('#city').val();
+			$('#city-err').hide();
+		}
+
+		if($('#country').val() == "") {
+			$("#country-err").text("Enter your country!");
+		} else {
+			newUser.country = $('#country').val();
+			$("#country-err").hide();
+		}
+
 		$.ajax({
-			method: 'POST',
-			url: "/about",
-			// url: '/user/signup',
+			method: "POST",
+			url: "/auth/signup",
 			data: newUser
 		}).done(function(response){
 			console.log(response);
+			$("#error").text('Profile saved!').css({
+				"border": "1px solid #00ff00",
+				"color": "#00ff00",
+				"padding": "5px 10px"
+			});
+			responseId = response._id;
 		}).fail(function(response){
 			console.log(response.responseText);
-			$('#error').css({
-				"display": "block",
+			$("#error").text(JSON.parse(response.responseText).message).css({
 				"border": "1px solid #ff0000",
 				"color": "#ff0000",
-				"padding": "10px",
-				"font-size": "13px"
+				"padding": "5px 10px"
 			});
-			$("#error").text("Signup not completed! Please try again!");
 		});
 	});
-</script> -->
+</script>
 </html>

@@ -166,6 +166,7 @@ textarea {
 	padding: 10px;
 	width: 100%;
 	margin: 20px auto;
+	margin-bottom: 5px;
 	margin-top: 5px;
 	border: 1px solid #79fc88;
 	border-radius: 3px;
@@ -178,6 +179,7 @@ button {
 	padding: 10px;
 	margin: 0 auto;
 	margin-top: 5px;
+	margin-bottom: 5px;
 	border: 1px solid #cfc;
 	border-radius: 3px;
 	background: #79fc88;
@@ -251,7 +253,7 @@ button:hover {
 	border: none;
 	clear: both;
 }
-
+/* 
 #error {
 	display: none;
 	width: 100%;
@@ -265,7 +267,7 @@ button:hover {
 	background: #ffd1d1;
 	color: #ff0000;
 	margin-top: 20px;
-}
+} */
 
 .contact-message-style {
 	width: 350px;

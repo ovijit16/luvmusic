@@ -25,7 +25,7 @@
 
 		<div class="container-inside2">
 			<div class="header-text">
-				<h3 class="heading-all-text">Anis Sarker</h3>
+				<h3 class="heading-all-text"><%= request.user.name %></h3>
 				<hr>
 			</div>
 			<div class="content-pane">
@@ -35,29 +35,29 @@
 							<td class="title-desc"></td>
 							<td class="value-desc">
 								<div class="album-art-details">
-									<img class="img-details" src="">
+									<img class="img-details" src="https://dl.dropboxusercontent.com/s/wnb2cvxvmdg71h0/29472919_1580560088707724_8552935424429916160_n.jpg?dl=0">
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="title-desc">Username</td>
-							<td class="value-desc"><%= request.person.username %></td>
+							<td class="value-desc"><%= request.user.username %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">Name</td>
-							<td class="value-desc"><%= request.person.name %></td>
+							<td class="value-desc"><%= request.user.name %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">Email</td>
-							<td class="value-desc"><%= request.person.email %></td>
+							<td class="value-desc"><%= request.user.email %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">City</td>
-							<td class="value-desc"><%= request.person.city %></td>
+							<td class="value-desc"><%= request.user.city %></td>
 						</tr>
 						<tr>
 							<td class="title-desc">Country</td>
-							<td class="value-desc"><%= request.person.country %></td>
+							<td class="value-desc"><%= request.user.country %></td>
 						</tr>
 						<tr>
 							<td class="edit-btn"><a href="/setting">Setting</a></td>
@@ -72,9 +72,5 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
 <script src="/views/player/js/player.js"></script>
-<script>
-	$("")
-</script>
-
 
 </html>

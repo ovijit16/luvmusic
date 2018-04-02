@@ -25,7 +25,7 @@ var validateLocalStrategyPassword = function(password) {
  * User Schema
  */
 var UserSchema = new Schema({
-
+/*
     firstName: {
         type: String,
         trim: true,
@@ -44,51 +44,81 @@ var UserSchema = new Schema({
         type: String,
         trim: true
     },
+*/
+    name: {
+        type: String,
+        trim: true,
+        required: 'Your name required'
+    },
+
     email: {
         type: String,
         trim: true,
-        unique: 'Email already exists',
+        unique: true,
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required: 'Email required'
     },
+    
     username: {
         type: String,
         trim: true,
-        required: 'User Name required'
+        unique: true,
+        // match: [/a-z0-9-._{3-15}$/, 'Username must be between 3-15 character and can use only ._-'],
+        required: 'Username required'
     },
+    
     photo: {
         type: String,
         default: 'http://www.ee-ip.org/sites/default/files/default_images/default-user.png',
         trim: true
     },
+  /*  
     description: {
         type: String,
         default: '',
         trim: true
     },
+    
     linkedin: {
         type: String,
         default: '',
         trim: true
     },
+    
     twitter: {
         type: String,
         default: '',
         trim: true
     },
+  */  
     password: {
         type: String,
         default: '',
         validate: [validateLocalStrategyPassword, 'Password should be longer'],
         required: 'Password required'
     },
+    
+    city : {
+        type: String,
+        trim: true,
+        required: 'Your city required'
+    },
+    
+    country : {
+        type: String,
+        trim: true,
+        required: 'Your country required'
+    },
+
     salt: {
         type: String
     },
+    
     provider: {
         type: String,
         required: 'Provider is required'
     },
+    
     providerData: {},
     additionalProvidersData: {},
     roles: {
@@ -98,9 +128,11 @@ var UserSchema = new Schema({
         }],
         default: ['user']
     },
+    
     updated: {
         type: Date
     },
+    
     created: {
         type: Date,
         default: Date.now
