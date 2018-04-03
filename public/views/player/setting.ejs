@@ -62,8 +62,7 @@
 						</div>
 						<div class="form-group">
 							<div class="album-art-details">
-								<!-- <img id="preview-photo" class="img-details" src="<%= request.user.photo %>"> -->
-								<img id="preview-photo" class="img-details" src="">
+								<img id="preview-photo" class="img-details" src=""/>
 							</div>
 							<span class="change-photo-text">Change Photo</span>
 							<input class="form-control" type="file" id="photo" name="Image" onchange="previewPhoto()" accept="Image/*">
@@ -100,15 +99,6 @@
 						</div>
 					</form>
 				</div>
-
-
-
-				<div id="authed-section" style="display:none;">
-					<p>You have successfully authenticated. Below are the contents of your root directory. They were fetched using the SDK and access token.</p>
-					<ul id="files"></ul>
-				</div>
-
-
 			</div>
 		</div>
 	</div>
@@ -119,12 +109,8 @@
 <script>
 
 	var newUser = {name: "", email: "", username: "", city: "", country: "", photo: ""};
-	// var newUser = {name: "", email: "", username: "", city: "", country: ""};
 	var usernamePattern = /^[a-z0-9_-]{3,15}$/;
 	var emailPattern = /^[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z0-9]{2,4})+$/;
-	
-	var photo_name = "";
-	var item_name = "";
 
 	$('.error').css({
 		"display": "block",
@@ -178,8 +164,8 @@
 			$("#country-err").hide();
 		}
 		
-		newUser.photo = profile_pic_name;
-		alert(profile_pic_name);
+		newUser.photo = dsfsf;
+
 
 		$.ajax({
 			method: "PUT",
@@ -205,6 +191,4 @@
 
 </script>
 <script src="/views/player/js/dropbox.js"></script>
-
-
 </html>

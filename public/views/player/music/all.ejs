@@ -36,28 +36,17 @@
 			</div>
 			<div class="content-pane">
 				<div class="row">
-                    <!-- {{#each imgs}} -->
-                    <% musics.forEach(function(music) { %>
-                        <!-- <img src="<%= music %>"> -->
+                    <!-- <% musics.forEach(function(music) { %>
                         <audio src="<%= music %>" id="myaudio" controls>FileName</audio>
-                        <!-- <img src="{{this}}"> -->
-                    <% }); %>
-                        <!-- {{/each}} -->
-                    <br/>
+                    <% }); %> -->
+
                     <% for(var i=0; i < musics.length; i++) { %>
-                        <!-- <p> <%= musics[i] %> </p> -->
-                        <a href="<%= musics[i] %>"><i style="font-size: 30px; color: #04fbff; padding: 5px" class="fa fa-download"></i></a>
-                        <p><%= musics[i] %></p>
+                        <a href="<%= musics[i][0] %>" style="color: #fff; padding: 10px; text-decoration: none; margin-right: 1px; background: #000; border-radius: 3px"> <%= musics[i][1] %> </a>
                     <% } %>
-                    <div id="authed-section" style="display:none;">
-                        <p>You have successfully authenticated. Below are the contents of your root directory. They were fetched using the SDK and access token.</p>
-                        <ul id="files"></ul>
-                    </div>
                 </div>
             </div>
         </div>
 </body>
-<script src="/views/player/js/dropbox.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
 <script src="/views/player/js/player.js"></script>

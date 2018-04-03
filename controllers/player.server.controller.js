@@ -2,6 +2,13 @@ var mongoose = require('mongoose');
 var errorHandler = require('./errors.server.controller');
 var _ = require('lodash');
 
+const
+crypto = require('crypto');
+config = require('./../dropbox_config.js');
+NodeCache = require( "node-cache" );
+rp = require('request-promise');
+var mycache = new NodeCache();
+
 
 // browse page
 module.exports.browseMusic = function(req, res) {
@@ -46,9 +53,13 @@ module.exports.search = function(req, res) {
 
 // setting page
 module.exports.setting = function(req, res) {
+
+    let token = mycache.get("aTempTokenKey");
+	let paths = fileUpload(token);
 	res.render('./../public/views/player/setting.ejs', {
 		user: req.user || null,
-		request: req
+		request: req,
+		photos: paths
 	});
 };
 
@@ -58,4 +69,24 @@ module.exports.profile = function(req, res) {
 		user: req.user || null,
 		request: req
 	});
+};
+
+// dropbox file upload
+function fileUpload(token, filename) {
+	var options = {
+		url: config.DBX_CONTENT_DOMAIN + config.DBX_FILE_UPLOAD,
+		mathod: 'POST',
+		header: {
+			'Authorization': "Bearer " + token,
+			'Content-Type': 'application/octet-stream',
+			'Dropbox-API-Arg': {
+				path: '/' + filename,
+				mode: 'add',
+				autorename: true,
+				mute: false
+			}
+		}
+	}
+
+	return filename;
 };

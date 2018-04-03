@@ -69,7 +69,7 @@ var UserSchema = new Schema({
     
     photo: {
         type: String,
-        default: 'http://www.ee-ip.org/sites/default/files/default_images/default-user.png',
+        default: 'https://dl.dropboxusercontent.com/s/9v3sn409v94ehzh/pp.jpg?dl=0',
         trim: true
     },
   /*  

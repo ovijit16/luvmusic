@@ -10,7 +10,8 @@ module.exports.home = async (req,res,next)=>{
     let token = mycache.get("aTempTokenKey");
     if(token){
       try{
-        let paths = await getLinksAsync(token); 
+        let paths = await getLinksAsync(token);
+        console.log(paths);
         res.render('./../public/views/player/music/all.ejs', {
             user: req.user || null,
             request: req,
@@ -91,10 +92,13 @@ async function getLinksAsync(token){
   
     //Get a temporary link for each of those paths returned
     let temporaryLinkResults= await getTemporaryLinksForPathsAsync(token,result.paths);
-  
+
+    console.log(temporaryLinkResults.name);
+
     //Construct a new array only with the link field
     var temporaryLinks = temporaryLinkResults.map(function (entry) {
-      return entry.link;
+      // return entry.link;
+      return [entry.link, entry.metadata.name];
     });
   
     return temporaryLinks;
@@ -120,7 +124,7 @@ async function getLinksAsync(token){
   
       //Filter response to images only
       let entriesFiltered= result.entries.filter(function(entry){
-        return entry.path_lower.search(/\.(mp3|ogg|aac)$/i) > -1;
+        return entry.path_lower.search(/\.(mp3|ogg|aac|jpg|png|gif|jpeg)$/i) > -1;
       });        
   
       //Get an array from the entries with only the path_lower fields
@@ -155,8 +159,12 @@ async function getLinksAsync(token){
     paths.forEach((path_lower)=>{
       options.body = {"path":path_lower};
       promises.push(rp(options));
+      console.log(promises.path_lower);
     });
-  
+
+    // for(var i=0; i < promises.length; i++) {
+    // }
+
     //returns a promise that fullfills once all the promises in the array complete or one fails
     return Promise.all(promises);
   }
