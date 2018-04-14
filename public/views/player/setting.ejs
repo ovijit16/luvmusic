@@ -9,12 +9,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- javascript link -->
-	<!-- script for dropbox api to upload -->
 	<script src="/views/player/js/script.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.min.js"></script>
+	
+	<!-- script for dropbox api to upload -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.js"></script>-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.min.js"></script>-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.js"></script>-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.min.js"></script>-->
 </head>
 <body>
 	<!-- Sidebar Panel -->
@@ -34,7 +35,8 @@
 			</div>
 			<div class="content-pane">
 				<div class="row">
-					<form class="edit-form" onSubmit="return uploadFile()">
+					
+					<form class="edit-form">
 						<div class="form-group">
 							<label class="control-label">Name</label>
 							<input class="form-control" type="text" id="name" value="<%= request.user.name %>" placeholder="Your name">
@@ -61,22 +63,34 @@
 							<div class="error" id="country-err"></div>
 						</div>
 						<div class="form-group">
-							<div class="album-art-details">
-								<img id="preview-photo" class="img-details" src=""/>
-							</div>
-							<span class="change-photo-text">Change Photo</span>
-							<input class="form-control" type="file" id="photo" name="Image" onchange="previewPhoto()" accept="Image/*">
-							<div class="error" id="photo-err"></div>
-
-							<!-- A place to show the status of the upload -->
-							<h2 id="results"></h2>
-						</div>
-						<div class="form-group">
 							<input type="submit" id="save" value="Save" class="btn btn-save">
 							<input type="submit" id="delete" value="Delete Account" class="btn btn-delete">
 						</div>
 						<span><div class="error" id="error"></div></span>
 					</form>
+					
+					
+					<!-- upload photo -->
+					<form class="edit-form" enctype="multipart/form-data" action="/users/<%= request.user._id %>" id="uploadform" method="post" >
+						<h3 class="heading-all-text">Profile Photo</h3>
+						<hr><br>
+						
+						
+						<div class="form-group">
+							<div class="album-art-details">
+								<img id="preview-photo" class="img-details" src=""/>
+							</div>
+							<span class="change-photo-text">Change Photo</span>
+							<input class="form-control" type="file" id="photo" name="userFile" accept="image/*" onchange="previewPhoto()" >
+							<div class="error" id="photo-err"></div>
+							<!-- A place to show the status of the upload -->
+							<h2 id="results"></h2>
+						</div>
+						<input type="submit" id="upload" value="Upload Photo" name="submit" class="btn btn-save">
+					</form>
+					
+					
+				<!--	
 					<form class="edit-form">
 						<div id="#change-pass" class="change-password-div">
 							<span class="change-password-heading">Change Password</span>
@@ -84,20 +98,23 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label">Current Password</label>
-							<input class="form-control" type="password" name="current-password" placeholder="Current password">
+							<input class="form-control" type="password" id="current_password" name="current-password" placeholder="Current password">
 						</div>
 						<div class="form-group">
 							<label class="control-label">New Password</label>
-							<input class="form-control" type="password" name="new-password" placeholder="New password">
+							<input class="form-control" type="password" id="new_password" name="new-password" placeholder="New password">
 						</div>
 						<div class="form-group">
 							<label class="control-label">Confirm New Password</label>
-							<input class="form-control" type="password" name="confirm-password" placeholder="Confirm password">
+							<input class="form-control" type="password" id="confirm_password" name="confirm-password" placeholder="Confirm password">
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Update Password" class="btn btn-update">
+							<input id="update_password" value="Update Password" class="btn btn-update">
+							<div class="error" id="update_password-err"></div>
 						</div>
 					</form>
+					
+				-->	
 				</div>
 			</div>
 		</div>
@@ -108,10 +125,10 @@
 <script src="/views/player/js/player.js"></script>
 <script>
 
-	var newUser = {name: "", email: "", username: "", city: "", country: "", photo: ""};
+	var newUser = {name: "", email: "", username: "", city: "", country: ""};
 	var usernamePattern = /^[a-z0-9_-]{3,15}$/;
 	var emailPattern = /^[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z0-9]{2,4})+$/;
-
+	
 	$('.error').css({
 		"display": "block",
 		"border": "none",
@@ -164,9 +181,7 @@
 			$("#country-err").hide();
 		}
 		
-		newUser.photo = dsfsf;
-
-
+		
 		$.ajax({
 			method: "PUT",
 			url: "/users/<%= request.user._id %>",
@@ -178,6 +193,7 @@
 				"color": "#00ff00",
 				"padding": "10px"
 			});
+			// window.location.replace('/profile');
 		}).fail(function(response){
 			console.log(response.responseText);
 			$("#error").text(JSON.parse(response.responseText).message).css({
@@ -186,9 +202,29 @@
 				"padding": "10px"
 			});
 		});
-		// return false;
 	});
-
+	
+	var newPhoto = {photo: ""}
+	
+	
+	function previewPhoto() {
+	    var preview = document.getElementById('preview-photo'); //selects the query named img
+	    var file = document.getElementById('photo').files[0]; //sames as here
+	    var reader = new FileReader();
+	
+	    reader.onloadend = function () {
+	        preview.src = reader.result;
+	    }
+	
+	    if (file) {
+	        reader.readAsDataURL(file); //reads the data as a URL
+	    } else {
+	        preview.src = "";
+	    }
+	}
+	
+	previewPhoto();
+	
 </script>
-<script src="/views/player/js/dropbox.js"></script>
+<!--<script src="/views/player/js/dropbox.js"></script>-->
 </html>

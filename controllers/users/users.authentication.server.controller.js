@@ -68,9 +68,9 @@ exports.signin = function(req, res, next) {
 };
 
 exports.signinView = function(req, res) {
-	if(req.user != undefined) {
+	if(req.user != undefined){
 		req.header('Referer');
-		 res.redirect('/browse')
+		res.redirect('/browse')
 	}
 	res.render('./../public/views/user/signin.ejs', {
 		user: req.user || null,
@@ -84,7 +84,7 @@ exports.signinView = function(req, res) {
 exports.signupView = function(req, res) {
 	if(req.user != undefined) {
 		req.header('Referer');
-		 res.redirect('/browse')
+		res.redirect('/browse')
 	}
 	res.render('./../public/views/user/signup.ejs', {
 	   user: req.user || null,

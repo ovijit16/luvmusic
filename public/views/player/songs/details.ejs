@@ -16,14 +16,14 @@
 </head>
 <body>
 	<!-- Sidebar Panel -->
-	<% include include/sidebar %>
+	<% include ../include/sidebar %>
 	
 	<!-- Music Player -->
-	<% include include/player_ui %>
+	<% include ../include/player_ui %>
 		
 	<!-- Main Content -->
 	<div class="main-container">
-		<% include include/fixed_header %>
+		<% include ../include/fixed_header %>
 		
 		<div class="container-inside2">
 			<div class="header-text">
@@ -37,36 +37,34 @@
 							<td class="title-desc"></td>
 							<td class="value-desc">
 								<div class="album-art-details">
-									<img class="img-details" src="/views/upload/abbey_road.jpg" alt="Abbey Road" >
+									<img class="img-details" src="https://dl.dropboxusercontent.com/s/1d659on1oajhl62/music-logo.png?dl=0" alt="Abbey Road" >
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="title-desc">Title</td>
-							<td class="value-desc">Name of the songs</td>
+							<td class="value-desc"> <%= request.song.title %> </td>
 						</tr>
 						<tr>
 							<td class="title-desc">Artist</td>
-							<td class="value-desc">Artist name</td>
+							<td class="value-desc"> <%= request.song.artist %> </td>
 						</tr>
 						<tr>
 							<td class="title-desc">Album</td>
-							<td class="value-desc">Album name</td>
+							<td class="value-desc"> <%= request.song.album %> </td>
 						</tr>
 						<tr>
 							<td class="title-desc">Genre</td>
-							<td class="value-desc">Progressive Rock</td>
+							<td class="value-desc"> <%= request.song.genre %> </td>
 						</tr>
 						<tr>
 							<td class="title-desc">Year</td>
-							<td class="value-desc">1984</td>
+							<td class="value-desc"> <%= request.song.year %> </td>
 						</tr>
 						<tr>
-							<td class="title-desc">Length</td>
-							<td class="value-desc">4.50</td>
-						</tr>
-						<tr>
-							<td class="edit-btn"><a href="/edit">Edit</a></td>
+							<td class="edit-btn">
+								<!--<a href="<%= request.song.src %>"><i class="fa fa-download"></i> Download</a>-->
+							</td>
 							<td class="back-to-prev"><a href="/browse/songs">Back to List</a></td>
 						</tr>
 					</table>

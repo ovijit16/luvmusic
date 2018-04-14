@@ -14,7 +14,7 @@ table.music-list {
     border: none;
     display:  table;
     border-spacing:  inherit;
-    border-collapse: separate;
+    border-collapse: collapse;
 }
 
 tr.music-list-table-header {
@@ -33,6 +33,7 @@ th.no-change-list {
 
 tr.music-list-table {
     background: #101010;
+    border-bottom: 1px solid #1d1d1d;
 }
 
 td.music-list-shade {
@@ -99,7 +100,9 @@ td.value-desc {
     line-height: 30px;
     text-align: left;
 }
-
+.page-navigation {
+    margin-bottom: 50px;
+}
 td.edit-btn {
     padding: 20px 0;
     text-align: right;
@@ -146,6 +149,7 @@ td.back-to-prev > a:hover {
 
 img.img-details {
     width: 100%;
+    background: #7710f5;
 }
 
 .album-name{
@@ -238,7 +242,6 @@ td#msg-action {
     font-family: 'Dosis', sans-serif;
     font-size: 16px;
     display: -webkit-box;
-
 }
 
 .msg-ui-part {

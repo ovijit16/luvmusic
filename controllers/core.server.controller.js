@@ -47,3 +47,18 @@ module.exports.contact = function(req, res) {
 	});
 	
 };
+
+module.exports.faq = function(req, res) {
+
+	if(req.user != undefined) {
+		// return res.redirect(req.get('referer'));
+		// return res.redirect('referer');
+		return res.redirect('/browse');
+	}
+	
+	res.render('./../public/views/faq.ejs', {
+		user: req.user || null,
+		request: req
+	});
+	
+};

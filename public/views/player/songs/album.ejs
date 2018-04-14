@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Album List</title>
+	<link rel="shortcut icon" href="/views/headphones.png"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/stylePlayer.css">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/tableStyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- javascript link -->
+	<script src="/views/player/js/script.js"></script>
+</head>
+<body>
+	<!-- Sidebar Panel -->
+	<% include ../include/sidebar %>
+	
+	<!-- Music Player -->
+	<% include ../include/player_ui %>
+		
+	<!-- Main Content -->
+	<div class="main-container">
+		<% include ../include/fixed_header %>
+		<div class="container-inside2">
+			<div class="header-for-all">
+				<div class="cover-img-container">
+					<div class="header-img-container">
+						<img class="header-img" src="https://dl.dropboxusercontent.com/s/1d659on1oajhl62/music-logo.png?dl=0">
+					</div>
+				</div>
+				<div class="text-container">					
+					<h3 class="heading-category-text">Albums</h3>
+					<!--<h4 class="album-text">All Songs</h4>-->
+				</div>
+			</div>
+
+
+			<div class="row">
+				<% var c = 0 %>
+				<% for(var i=0; i < songs.length; i++) { %>
+					<% for(var j = 0; j < song.length; j++) { %>
+						<% if (songs[i][2] == song[j].src) { %>
+							<h1 style="border: 1px solid #ccc; margin-top: 5px; font-size: 16px; width: 50%; color: #f3c80a; font-family: 'Open Sans', sans-serif; padding: 10px; margin-bottom: 10px;"><%= song[j].album %></h1>
+							<table class="music-list" id="myTable" >
+								<thead>
+									<tr class="music-list-table-header">
+										<th class="no-change-list play-pause-header"><span><i class="fa fa-play"></i>|<i class="fa fa-pause"></i></span></th>
+										<th class="no-change-list no-title"><span>#</span></th>
+										<th class="no-change-list music-title"><span>Title</span></th>
+										<th class="no-change-list artist-title"><span>Artist</span></th>
+										<!--<th class="no-change-list duration-title"><span><i class="fa fa-clock-o"></i></span></th>-->
+										<th class="no-change-list option-title"><span><i class="fa fa-ellipsis-h"></i></span></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="music-list-table">
+										<td class="music-list-shade play-pause-table">
+											<!--<audio class="play" oncload="musicDur()" id="myaudio<%= c = c + 1 %>" src="<%= songs[i][0] %>" preload="auto"><i class="fa fa-play"></i></audio>-->
+											<!--<button class="play_pause" >Play</button>-->
+										</td>
+										<td class="music-list-shade no-title"> <%= c %> </td>
+										<td id="music-title" class="music-list-shade music-title"><%= song[j].title %></td>
+										<td id="music-artist" class="music-list-shade artist-title"><%= song[j].artist %></td>
+										<!--<td id="music-duration<%= c %>" class="music-list-shade duration-title"></td>-->
+										<td class="music-list-shade option-title"><a href="/details/<%= song[j]._id %>"><i class="fa fa-list"></i></a> | <a id="srclink<%= c %>" href="<%= songs[i][0] %>"><i class="fa fa-download"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						<% }%>
+					<% } %>
+				<% } %>
+				
+			</div>	
+		</div>
+	</div>
+	
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+</body>
+<!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--<script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>-->
+<!--<script src="/lib/jquery/dist/jquery.min.js"></script>-->
+<!--<script src="/lib/jquery/dist/script.js"></script>-->
+<script src="/lib/jquery/dist/jquery-paginate.js"></script>
+<script src="/lib/jquery/dist/jquery-paginate.min.js"></script>
+<!--<script src="/lib/jquery/dist/moment.min.js"></script>-->
+
+<script>
+	// Paginate it
+	$('#myTable').paginate({
+		limit: 5,
+		initialPage: 0
+	});
+
+
+	// var l = 0;
+	// l = l + 1;
+	// $("#myaudio" + l).on("canplaythrough", function(e){
+	//     var seconds = e.currentTarget.duration;
+	//     var duration = moment.duration(seconds, "seconds");
+	    
+	//     var time = "";
+	//     var hours = duration.hours();
+	//     if (hours > 0) { time = hours + ":" ; }
+	    
+	//     time = time + duration.minutes() + ":" + duration.seconds();
+	//     $("#music-duration" + l).text(time);
+	// });
+	
+	var tracks = [
+			<% for(var i=0; i < songs.length; i++) { %>
+				<% for(var j = 0; j < song.length; j++) { %>
+					<% if (songs[i][2] == song[j].src ) { %>
+						{	title:'<%= song[j].title %>',
+							artist: "<%= song[j].artist %>",
+							year: "<%= song[j].year %>",
+							genre: "<%= song[j].genre %>",
+							album: "<%= song[j].album %>",
+							path: "<%= songs[i][0] %>"
+						},
+					<% } %>
+				<% } %>
+			<% } %>
+		];
+		
+
+	var currentSong = Math.round(Math.random() * (tracks.length - 1));
+	var track = new Audio();
+	// var track = document.getElementById("myaudio");
+	track.src = tracks[currentSong].path;
+	var isPlaying = false;
+	function songInfo(songTitle, artistName) {
+		var titleSong = document.getElementById('titleSong');
+		var nameArtist = document.getElementById('nameArtist');
+		titleSong.innerText = songTitle.substring(0,30) + "...";
+		nameArtist.innerText = artistName;
+	}
+	
+	// time and duration
+	String.prototype.toHHMMSS = function () {
+	    var sec_num = parseInt(this, 10); // don't forget the second param
+	    var hours   = Math.floor(sec_num / 3600);
+	    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+	
+	    if (hours   < 10) {hours   = "0" + hours;}
+	    if (minutes < 10) {minutes = "0" + minutes;}
+	    if (seconds < 10) {seconds = "0" + seconds;}
+	    return minutes + ':' + seconds;
+	}
+	
+	function playPause() {
+		if(isPlaying) {
+			track.pause();
+		} else {
+			track.play();
+			songInfo(tracks[currentSong].title, tracks[currentSong].artist);
+			// showing currentTime and Duration
+			setInterval(function() {
+				var time = Math.round(track.currentTime);
+				var cTime = time;
+				var duration = Math.round(track.duration);
+				var durTime = duration;
+				time = time.toString().toHHMMSS();
+				duration = duration.toString().toHHMMSS();
+				document.getElementById('currentTime').innerText = time;
+				document.getElementById('duration').innerText = duration;
+				cTime = cTime * 100;
+				durTime = cTime / durTime;
+				$('#knotTime .ui-slider-range-min').css({
+					width: durTime.toString() + "%"
+				});
+				$('#knotTime .ui-slider-handle').css({
+					left: durTime.toString() + "%"
+				});
+				if(track.currentTime === track.duration){
+					nextSong();
+				}
+			});
+		}
+	};
+	
+	track.onplaying = function() {
+	 	isPlaying = true;
+		document.getElementById("playPause").innerHTML = "<i class='fa fa-pause'></i>";
+	};
+	
+	track.onpause = function() {
+		isPlaying = false;
+		document.getElementById("playPause").innerHTML = "<i class='fa fa-play'></i>";
+	};
+	
+	function previousSong() {
+		currentSong--;
+		if(currentSong < 0) {
+			currentSong = tracks.length - 1;
+		}
+		track.src = tracks[currentSong].path;
+		track.play();
+		songInfo(tracks[currentSong].title, tracks[currentSong].artist);
+	}
+	
+	function nextSong() {
+	
+		if (isShuffle) {
+			currentSong = Math.round(Math.random() * (tracks.length - 1));
+			track.src = tracks[currentSong].path;
+			track.play();
+			songInfo(tracks[currentSong].title, tracks[currentSong].artist);
+		} else {
+			currentSong++;
+			if(currentSong > tracks.length- 1 ) {
+				currentSong = 0;
+			}
+			track.src = tracks[currentSong].path;
+			track.play();
+			songInfo(tracks[currentSong].title, tracks[currentSong].artist);
+		}
+	}
+	
+	$(document).ready(function() {
+		$('#knotTime').slider({
+			min: 0,
+			max: 100,
+			value: 0,
+			animate: true,
+			range: 'min',
+			slide: function(event, ui) {
+				// var cTime = track.currentTime * 100;
+				// var dTime = cTime / track.duration;
+				updateTime(ui.value / 100);
+				console.log(ui.value / 100);
+			}
+		});
+	
+		$('#volume').slider({
+			min: 0,
+			max: 100,
+			value: 0,
+			animate: true,
+			range: 'min',
+			slide: function(event, ui) {
+				setVolume(ui.value / 100);
+			}
+		});
+	});
+	
+	function setVolume(myVolume) {
+		track.volume = myVolume;
+		console.log(myVolume);
+		if(myVolume == 0) {
+			document.getElementById('volumeController').innerHTML = "<i class='fa fa-volume-off'></i>";
+		} else {
+			document.getElementById('volumeController').innerHTML = "<i class='fa fa-volume-up'></i>";
+		}
+	}
+	
+	function updateTime(cTime) {
+		track.currentTime = cTime * 100;
+		track.duration = track.currentTime / track.duration;
+	}
+	
+	var isVolume = false;
+	function mute(event) {
+		if(isVolume == false) {
+			document.getElementById('volumeController').innerHTML = "<i class='fa fa-volume-off'></i>";
+			setVolume(0);
+			isVolume = true;
+			$('#volume .ui-slider-range-min').css({
+				width: "0%"
+			});
+			$('#volume .ui-slider-handle').css({
+				left: "0%",
+				transition: 'ease 0.1s'
+			});
+		} else {
+			document.getElementById('volumeController').innerHTML = "<i class='fa fa-volume-up'></i>";
+			setVolume(1);
+			isVolume = false;
+			$('#volume .ui-slider-range-min').css({
+				width: "100%"
+			});
+			$('#volume .ui-slider-handle').css({
+				left: "100%",
+				transition: 'ease 0.1s'
+			});
+		}
+	}
+	
+	var isClicked = false;
+	function repeatMode() {
+		if(isClicked) {
+			$('#repeat .fa').css({
+				color: '#cccccc'
+			});
+			isClicked = false;
+			track.loop = false;
+			track.pause();
+		} else {
+			$('#repeat .fa').css({
+				color: '#005550'
+			});
+			isClicked = true;
+			track.loop = true;
+			track.play();
+		}
+	}
+	
+	var isShuffle = false;
+	function shuffleMode() {
+		if(isShuffle) {
+			$('#shuffle .fa').css({
+				color: '#cccccc'
+			});
+			isShuffle = false;
+		} else {
+			$('#shuffle .fa').css({
+				color: '#005550'
+			});
+			isShuffle = true;
+		}
+		return isShuffle;
+	}
+</script>
+<!--<script src="/views/player/js/player.js"></script>-->
+	
+
+
+</html>

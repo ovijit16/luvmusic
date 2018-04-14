@@ -1,10 +1,8 @@
 <div class="fixed-header">
-	<div class="search-bar">
-		<input class="search-box" type="text" name="search" placeholder="Username">
-		<button class="search-btn" type="reset">
-			<i class="fa fa-search"></i>
-		</button>
-	</div>
+	<form class="search-bar" method="GET" action="/browse/songs">
+		<input class="search-box" type="text" name="search" placeholder="Song name...">
+		<input class="search-btn" type="submit" id="search" value="Search">
+	</form>
 	<div class="user-account">
 		<span class="user-profile">
 			<a id="profile-link" class="user-profile-link" href="/profile/">
@@ -13,7 +11,6 @@
 		<div class="dropdown">
 			<button onclick="dropdown()" class="dropbtn">
 				<i class="fa fa-angle-down"></i> 
-				<!-- &#x0276D; -->
 			</button>
 			<div class="dropdown-content" id="dropDown">
 				<a class="user-profile-link display-block-style" href="/profile">
@@ -30,6 +27,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
 <script>
+	$("#search").submit(function(e) {
+	   	return false;
+	});
+	
 	$("#signout").click(function(event){
 		$.ajax({
 			method: 'GET',

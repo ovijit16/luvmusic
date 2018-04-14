@@ -57,7 +57,7 @@
 												<%= messages[i].created %>
 											</td> -->
 											<td class="tbl-data" id="msg-action">
-												<a href="/admin/contact/<%= messages[i]._id %> "><i class="fa fa-gear"></i></a>
+												<a href="/admin/contact/<%= messages[i]._id %> "><i style="color: #191919;" class="fa fa-envelope-open"></i></a>
 											</td>
 										</tr>
 									<% } %>
@@ -73,18 +73,18 @@
 				</div>
 		</div>
 
-		<script src="/lib/jquery/dist/jquery.min.js"></script>
-		<script src="/lib/jquery/dist/script.js"></script>
-		<script src="/lib/jquery/dist/jquery-paginate.js"></script>
-		<script src="/lib/jquery/dist/jquery-paginate.min.js"></script>
-
-		<script>
-			// Paginate it
-			$('#myTable').paginate({
-				limit: 5,
-				initialPage: 0
-			});			
-		</script>
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<script src="/lib/jquery/dist/script.js"></script>
+	<script src="/lib/jquery/dist/jquery-paginate.js"></script>
+	<script src="/lib/jquery/dist/jquery-paginate.min.js"></script>
+	
+	<script>
+		// Paginate it
+		$('#myTable').paginate({
+			limit: 6,
+			initialPage: 0
+		});			
+	</script>
 </body>
 
 </html>

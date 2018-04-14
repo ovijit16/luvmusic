@@ -160,7 +160,7 @@ body {
 input[type="text"],
 input[type="password"],
 input[type="email"],
-textarea {
+textarea, select {
 	outline: none;
 	display: block;
 	padding: 10px;

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Luvmusic | Add Song</title>
+	<link rel="shortcut icon" href="/views/headphones.png"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/stylePlayer.css">
+	<link rel="stylesheet" type="text/css" href="/views/player/css/tableStyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- javascript link -->
+	<script src="/views/player/js/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/Dropbox-sdk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.1/DropboxTeam-sdk.min.js"></script>
+</head>
+<body>
+	<!-- Sidebar Panel -->
+	<% include ../include/sidebar %>
+	
+	<!-- Music Player -->
+	<% include ../include/player_ui %>
+		
+	<!-- Main Content -->
+	<div class="main-container">
+		<% include ../include/fixed_header %>
+
+		<div class="container-inside2">
+			<div class="header-text">
+				<h3 class="heading-all-text">Add a Song</h3>
+				<hr>
+			</div>
+			<div class="content-pane">
+				<div class="row">
+					
+					<form class="edit-form" onSubmit="return uploadFile()">
+						<div class="form-group">
+							<label class="control-label">Music</label>
+							<input class="form-control" type="file" id="musicsrc" name="music" accept="Audio/*">
+							<div class="error" id="music_src-err"></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Title</label>
+							<input class="form-control" type="text" id="title" placeholder="Title goes here">
+						</div>
+						<div class="form-group">
+							<label class="control-label">Artist</label>
+							<input class="form-control" type="text" id="artist" placeholder="Artist goes here">
+						</div>
+						<div class="form-group">
+							<label class="control-label">Album</label>
+							<input class="form-control" type="text" id="album" placeholder="Album goes here">
+						</div>
+						<div class="form-group">
+							<label class="control-label">Genre</label>
+							<input class="form-control" type="text" id="genre" placeholder="Genre goes here">
+						</div>
+						<div class="form-group">
+							<label class="control-label">Year</label>
+							<input class="form-control" type="combobox" id="year" placeholder="2018">
+						</div>
+						<div class="form-group">
+							<input type="submit" id="save" value="Save" class="btn btn-save">
+							<!-- <input type="submit" value="Update" class="btn btn-update"> -->
+							<!-- <input type="submit" value="Delete" class="btn btn-delete"> -->
+						</div>
+						<div class="error"></div>
+						<div class="back-to-prev">
+							<a href="/browse/songs">Back to List</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+<script src="/views/player/js/player.js"></script>
+<script>
+	
+	var db = {};
+	// var idd = "";
+	
+	// upload to dropbox
+	function uploadFile() {
+	    // var ACCESS_TOKEN = document.getElementById('access-token').value;
+	    var ACCESS_TOKEN = "MyXjMD7lxrAAAAAAAAAB7uH0PeR2XEhNj8ZPnkIPtHc2ZVV4z2Ao0Yq1fqnfVtDB";
+	    var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
+	    var fileInput = document.getElementById('musicsrc');
+	    var file = fileInput.files[0];
+	    dbx.filesUpload({ path: '/' + file.name, contents: file }).then(function (response) {
+	    	var results = document.getElementById('music_src-err');
+	    	$('#music_src-err').css({
+	    		'color': '#00ff00',
+	    		'padding': '5px' 
+	    	});
+	    	results.appendChild(document.createTextNode('File uploaded!'));
+	    	console.log(response);
+	    	// window.location.replace('/profile');
+	    	var path = '/' + file.name;
+	    	db = response;
+	    	alert('Successfully added music!');
+	    	
+	    	getSrc(db.id);
+	    	
+	    	
+	    }).catch(function (error) {
+			alert(error);
+			console.error(error);
+		});
+		return false;
+	}
+	            
+	var newMusic = {title: "", artist: "", year: "", genre: "", album: "", src:""};
+	
+	
+	$('.error').css({
+		"display": "block",
+		"border": "none",
+		"color": "#ff0000",
+		"font-size": "18px",
+		"width": "100%",
+		"box-sizing": "border-box",
+		"font-family": "'Dosis', sans-serif"
+	});
+	
+	function getSrc(src_id) {    
+	    // $('#save').click(function() {
+		
+			if ($('#title').val() == "") {
+				newMusic.title = "Unknown";
+			} else {
+				newMusic.title = $('#title').val();
+			}
+			
+			if ($('#artist').val() == "") {
+				newMusic.artist = "Unknown";
+			} else {
+				newMusic.artist = $('#artist').val();
+			}
+			
+			if ($('#year').val() == "") {
+				newMusic.year = "Unknown";
+			} else {
+				newMusic.year = $('#year').val();
+			}
+			
+			if ($('#genre').val() == "") {
+				newMusic.genre = "Unknown";
+			} else {
+				newMusic.genre = $('#genre').val();
+			}
+			
+			if ($('#album').val() == "") {
+				newMusic.album = "Unknown";
+			} else {
+				newMusic.album = $('#album').val();
+			}
+			
+			newMusic.src = src_id;
+		
+			$.ajax({
+				method: "POST",
+				url: "/api/songs",
+				data: newMusic
+			}).done(function(response){
+				console.log(response);
+				$("#error").text('Successfully added music!!').css({
+					"border": "1px solid #00ff00",
+					"color": "#00ff00",
+					"padding": "10px"
+				});
+			}).fail(function(response){
+				console.log(response.responseText);
+				$("#error").text(JSON.parse(response.responseText).message).css({
+					"border": "1px solid #ff0000",
+					"color": "#ff0000",
+					"padding": "10px"
+				});
+			});
+		// });
+	}
+		         
+</script>
+<!--<script src="/views/player/js/dropbox.js"></script>-->
+
+</html>

@@ -23,6 +23,7 @@ module.exports = function(app) {
 	app.route('/').get(core.index);
 	app.route('/about').get(core.about);
 	app.route('/contact').get(core.contact);
+	app.route('/faq').get(core.faq);
 
     app.route('/admin/contacts').get(users.requiresLogin, contacts.listView);
     app.route('/admin/contact/:contactId').get(users.requiresLogin, contacts.singleView);

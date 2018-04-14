@@ -18,6 +18,25 @@
 	padding:  10px;
 }
 
+button.play_pause {
+    border-radius: 3px;
+    padding: 10px; 
+    display: block;
+    border: none;
+    border-bottom: 2px solid #eee;
+    background: #000;
+    color: #ccc;
+    outline: none;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+button.play_pause:hover {
+	transition: 0.2s ease;
+	color: #333;
+	background: #eee;
+}
+
 .album-art {
 	width: 60px;
 	height:  60px;

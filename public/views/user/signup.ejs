@@ -33,12 +33,33 @@
 			<span>Confirm Password</span>
 			<input type="password" id="confirm_password" placeholder="Confirm password">
 			<div class="error" id="confirm_password-err"></div>
-			<span>City</span>
+			
+			<!--<span>City</span>-->
+			<!--<input type="text" id="city" placeholder="City">-->
+			<!--<div class="error" id="city-err"></div>-->
+			<!--<span>Country</span>-->
+			<!--<input type="text" id="country" placeholder="Country">-->
+			<!--<div class="error" id="country-err"></div>-->
+			<span>Country</span><br/>
+			<!--<input type="submit" id="country" placeholder="Country">-->
+			
+			<select id="country" required>
+               <option value="" disabled selected hidden="">Country</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="California">California</option>
+                <option value="Egypt">Egypt</option>
+                <option value="India">India</option>
+                <option value="Spain">Spain</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+            </select>
+            <div class="error" id="country-err"></div>
+            
+            <span>City</span>
 			<input type="text" id="city" placeholder="City">
 			<div class="error" id="city-err"></div>
-			<span>Country</span>
-			<input type="text" id="country" placeholder="Country">
-			<div class="error" id="country-err"></div>
+			
+			
 			<button id="submit" type="submit">Sign up</button>
 			<span><div class="error" id="error"></div></span>
 		</div>
@@ -49,13 +70,11 @@
 <script src="/lib/jquery/dist/jquery.min.js"></script>
 <script src="/vendor/ejs_production.js"></script>
 <script>
-	var responseId = "";
-	// var newUser = {name:"", username:"", email:"", city:"", country:"", photo:""};
+	
 	var usernamePattern = /^[a-z0-9_.-]{3,15}$/;
 	var emailPattern = /^[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([\_.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z0-9]{2,4})+$/;
 	var newUser = {name: "", email: "", username: "", password: "", city: "", country: ""};
 	
-		
 	$('.error').css({
 		"display": "block",
 		"border": "none",
@@ -112,7 +131,7 @@
 			newUser.password = $('#password').val();
 			$('#confirm_password-err').hide();
 		}
-
+		
 		if($('#city').val() == "") {
 			$('#city-err').text("Enter your city!");
 		} else {
@@ -138,7 +157,7 @@
 				"color": "#00ff00",
 				"padding": "5px 10px"
 			});
-			responseId = response._id;
+			window.location.replace('/setting');
 		}).fail(function(response){
 			console.log(response.responseText);
 			$("#error").text(JSON.parse(response.responseText).message).css({

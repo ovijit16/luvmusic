@@ -1,22 +1,28 @@
-var trackList = [	"Neil young - Heart Of Gold.mp3",
-					"Elvis Presley- In The Ghetto.MP3",
-					"John Lennon - Imagine .mp3",
-					"The Sound of Silence (Original Version from 1964).mp3",
-					"Pearl Jam - Black.mp3",
-					"Scorpions - Still Loving You.mp3"];
-var paths = "../upload/songs/";
-var tracks = [
-	{title: "Heart Of Gold", artist: "Neil Young", year: "1998", genre: "Rock", albumArt: "../upload/viva_la_vida.jpg", album: "Unknown", path: paths + trackList[0]},
-	{title: "In The Ghetto", artist: "Elvis Presley", year: "1970", genre: "Rock n Roll", albumArt: "../upload/led_zeppelin.jpg", album: "Unknown", path: paths + trackList[1]},
-	{title: "Imagine", artist: "John Lennon", year: "1972", genre: "Rock", albumArt: "../upload/abbey_road.jpg", album: "Unknown", path: 'https://www.dropbox.com/s/yv4bkxom0srz885/John%20Lennon%20-%20Imagine%20.mp3'},
-	{title: "The Sound of Silence", artist: "Simon & Garfunkel", year: "1964", genre: "Rock", albumArt: "../upload/the_wall.jpg", album: "Unknown", path: paths + trackList[3]},
-	{title: "Black", artist: "Pearl Jam", year: "1984", genre: "Rock", albumArt: "../upload/ten.jpg", album: "Unknown", path: paths + trackList[4]},
-	{title: "Still Loving You", artist: "The Eagles", year: "1971", genre: "Rock", albumArt: "../upload/nevermind.jpg", album: "Unknown", path: paths + trackList[5]},
-];
+// var trackList = [	"Neil young - Heart Of Gold.mp3",
+// 					"Elvis Presley- In The Ghetto.MP3",
+// 					"John Lennon - Imagine .mp3",
+// 					"The Sound of Silence (Original Version from 1964).mp3",
+// 					"Pearl Jam - Black.mp3",
+// 					"Scorpions - Still Loving You.mp3"];
+					
+					
+// var paths = "../upload/songs/";
+// var tracks = [
+// 	{title: "Heart Of Gold", artist: "Neil Young", year: "1998", genre: "Rock", albumArt: "../upload/viva_la_vida.jpg", album: "Unknown", path: paths + trackList[0]},
+// 	{title: "In The Ghetto", artist: "Elvis Presley", year: "1970", genre: "Rock n Roll", albumArt: "../upload/led_zeppelin.jpg", album: "Unknown", path: paths + trackList[1]},
+// 	{title: "Imagine", artist: "John Lennon", year: "1972", genre: "Rock", albumArt: "../upload/abbey_road.jpg", album: "Unknown", path: 'https://www.dropbox.com/s/yv4bkxom0srz885/John%20Lennon%20-%20Imagine%20.mp3'},
+// 	{title: "The Sound of Silence", artist: "Simon & Garfunkel", year: "1964", genre: "Rock", albumArt: "../upload/the_wall.jpg", album: "Unknown", path: paths + trackList[3]},
+// 	{title: "Black", artist: "Pearl Jam", year: "1984", genre: "Rock", albumArt: "../upload/ten.jpg", album: "Unknown", path: paths + trackList[4]},
+// 	{title: "Still Loving You", artist: "The Eagles", year: "1971", genre: "Rock", albumArt: "../upload/nevermind.jpg", album: "Unknown", path: paths + trackList[5]},
+	
+	
+// ];
 
 var currentSong = Math.round(Math.random() * (tracks.length - 1));
 // var track = new Audio();
-var track = document.getElementById("myaudio");
+var c = 0;
+c = c + 1;
+var track = document.getElementById("myaudio"+c);
 // track.src = tracks[currentSong].path;
 var isPlaying = false;
 

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var MusicSchema = {
+var SongSchema = {
 
     title: {
         type: String,
@@ -34,11 +34,10 @@ var MusicSchema = {
 
     src: {
         type: String,
-        default: '',
         trim: true,
         required: 'Please select a valid music file!'
     }
 }
 
-var Music = mongoose.model('Music', MusicSchema, 'musics');
-module.exports = Music;
+var Song = mongoose.model('Song', SongSchema, 'songs');
+module.exports = Song;
